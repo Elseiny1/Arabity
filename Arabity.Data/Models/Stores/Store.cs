@@ -1,6 +1,6 @@
 ﻿namespace Arabity.Data.Models
 {
-    public class Store
+    public class StoreM
     {
         [Key]
         public string Id { get; set; }
@@ -23,15 +23,14 @@
            , ErrorMessage = "Invalid phone number")]
         public string PhoneNumbre { get; set; }
 
-        [MaxLength(80)]
-        public string WorkTime { get; set; }
-
         public string ImageUrl { get; set; }
 
         #region Relationships
         public ICollection<WorkTime> WorkTimes { get; set; }
+        public ICollection<CarType> CarTypes { get; set; }
+        public ICollection<Rate> Rates { get; set; }
 
-
+        
         #endregion
     }
 }

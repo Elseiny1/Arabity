@@ -1,6 +1,4 @@
-﻿
-
-namespace Arabity.Data.Models
+﻿namespace Arabity.Data.Models
 {
     public class WorkTime
     {
@@ -16,12 +14,12 @@ namespace Arabity.Data.Models
 
         #region Relationship
         [ForeignKey("Workshop_Id")]
-        public string Workshop_Id { get; set; }
-        public Workshop Workshop { get; set; }
+        public string? Workshop_Id { get; set; }
+        public Workshop? Workshop { get; set; }
 
         [ForeignKey("Store_Id")]
-        public string Store_Id { get; set; }
-        public Store Store { get; set; }
+        public string? Store_Id { get; set; }
+        public StoreM? Store { get; set; }
 
 
         #endregion

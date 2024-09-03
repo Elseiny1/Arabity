@@ -54,8 +54,9 @@
         #region Relationships
         [ForeignKey("Store_Id")]
         public string Store_Id { get; set; }
-        public Store Store { get; set; }
+        public StoreM Store { get; set; }
 
+        public ICollection<Rate> Rates { get; set; }
 
 
         #endregion

@@ -34,6 +34,8 @@
 
         #region Relationships
         public ICollection<WorkTime> WorkTimes { get; set; }
+        public ICollection<CarType> CarTypes { get; set; }
+        public ICollection<Rate> Rates { get; set; }
 
 
         #endregion

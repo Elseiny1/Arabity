@@ -1,5 +1,4 @@
-﻿
-namespace Arabity.Data.Models
+﻿namespace Arabity.Data.Models
 {
     public class Customer
     {
@@ -28,6 +27,8 @@ namespace Arabity.Data.Models
         public string PhoneNumbre { get; set; }
 
         #region Relations
+        public ICollection<Favourite> Favourites { get; set; }
+
 
 
         #endregion
