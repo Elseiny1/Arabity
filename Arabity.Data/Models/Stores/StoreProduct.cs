@@ -56,7 +56,7 @@
         public string Store_Id { get; set; }
         public StoreM Store { get; set; }
 
-        public ICollection<Rate> Rates { get; set; }
+       
 
 
         #endregion

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arabity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240903224909_Add-Models")]
-    partial class AddModels
+    [Migration("20240911215719_addModels_WithAddress")]
+    partial class addModels_WithAddress
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,23 +24,42 @@ namespace Arabity.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Arabity.Data.Models.CarType", b =>
+            modelBuilder.Entity("Arabity.Data.Models.Address", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Car_Type")
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Governrate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hamlet")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarType");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Arabity.Data.Models.Customer", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddressId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FristName")
@@ -63,6 +82,8 @@ namespace Arabity.Data.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
                 });
@@ -93,67 +114,12 @@ namespace Arabity.Data.Migrations
                     b.ToTable("Favourite");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Customer_Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Product_Parcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("RattingValue")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Review")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("StoreId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StoreProductParcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Store_Id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("WorkshopId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Workshop_Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("StoreId");
-
-                    b.HasIndex("StoreProductParcode");
-
-                    b.HasIndex("WorkshopId");
-
-                    b.ToTable("Rate");
-                });
-
             modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddressId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -176,6 +142,8 @@ namespace Arabity.Data.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Stores");
                 });
@@ -245,6 +213,9 @@ namespace Arabity.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AddressId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -271,76 +242,9 @@ namespace Arabity.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Workshops");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.WorkTime", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Close")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DayOfWeek")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Open")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("StoreId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Store_Id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkshopId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Workshop_Id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StoreId");
-
-                    b.HasIndex("WorkshopId");
-
-                    b.ToTable("WorkTime");
-                });
-
-            modelBuilder.Entity("CarTypeStoreM", b =>
-                {
-                    b.Property<string>("CarTypesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StoresId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CarTypesId", "StoresId");
-
-                    b.HasIndex("StoresId");
-
-                    b.ToTable("CarTypeStoreM");
-                });
-
-            modelBuilder.Entity("CarTypeWorkshop", b =>
-                {
-                    b.Property<string>("CarTypesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("WorkshopsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CarTypesId", "WorkshopsId");
-
-                    b.HasIndex("WorkshopsId");
-
-                    b.ToTable("CarTypeWorkshop");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -545,6 +449,15 @@ namespace Arabity.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Arabity.Data.Models.Customer", b =>
+                {
+                    b.HasOne("Arabity.Data.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("Arabity.Data.Models.Favourite", b =>
                 {
                     b.HasOne("Arabity.Data.Models.Customer", "Customer")
@@ -564,37 +477,13 @@ namespace Arabity.Data.Migrations
                     b.Navigation("StoreProduct");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
+            modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
                 {
-                    b.HasOne("Arabity.Data.Models.Customer", "Customer")
+                    b.HasOne("Arabity.Data.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
-                    b.HasOne("Arabity.Data.Models.StoreM", "Store")
-                        .WithMany("Rates")
-                        .HasForeignKey("StoreId");
-
-                    b.HasOne("Arabity.Data.Models.StoreProduct", "StoreProduct")
-                        .WithMany("Rates")
-                        .HasForeignKey("StoreProductParcode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Arabity.Data.Models.Workshop", "Workshop")
-                        .WithMany("Rates")
-                        .HasForeignKey("WorkshopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Store");
-
-                    b.Navigation("StoreProduct");
-
-                    b.Navigation("Workshop");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Arabity.Data.Models.StoreProduct", b =>
@@ -608,49 +497,13 @@ namespace Arabity.Data.Migrations
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.WorkTime", b =>
+            modelBuilder.Entity("Arabity.Data.Models.Workshop", b =>
                 {
-                    b.HasOne("Arabity.Data.Models.StoreM", "Store")
-                        .WithMany("WorkTimes")
-                        .HasForeignKey("StoreId");
-
-                    b.HasOne("Arabity.Data.Models.Workshop", "Workshop")
-                        .WithMany("WorkTimes")
-                        .HasForeignKey("WorkshopId");
-
-                    b.Navigation("Store");
-
-                    b.Navigation("Workshop");
-                });
-
-            modelBuilder.Entity("CarTypeStoreM", b =>
-                {
-                    b.HasOne("Arabity.Data.Models.CarType", null)
+                    b.HasOne("Arabity.Data.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("CarTypesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
-                    b.HasOne("Arabity.Data.Models.StoreM", null)
-                        .WithMany()
-                        .HasForeignKey("StoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CarTypeWorkshop", b =>
-                {
-                    b.HasOne("Arabity.Data.Models.CarType", null)
-                        .WithMany()
-                        .HasForeignKey("CarTypesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Arabity.Data.Models.Workshop", null)
-                        .WithMany()
-                        .HasForeignKey("WorkshopsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -707,25 +560,6 @@ namespace Arabity.Data.Migrations
             modelBuilder.Entity("Arabity.Data.Models.Customer", b =>
                 {
                     b.Navigation("Favourites");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
-                {
-                    b.Navigation("Rates");
-
-                    b.Navigation("WorkTimes");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.StoreProduct", b =>
-                {
-                    b.Navigation("Rates");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.Workshop", b =>
-                {
-                    b.Navigation("Rates");
-
-                    b.Navigation("WorkTimes");
                 });
 #pragma warning restore 612, 618
         }

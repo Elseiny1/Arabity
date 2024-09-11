@@ -28,7 +28,7 @@
 
         #region Relations
         public ICollection<Favourite> Favourites { get; set; }
-
+        public Address Address { get; set; }
 
 
         #endregion
