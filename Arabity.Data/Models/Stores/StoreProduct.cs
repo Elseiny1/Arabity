@@ -55,7 +55,7 @@
         public StoreM Store { get; set; }
 
         public ICollection<Rate> Rate { get; set; }
-
+        public ICollection<Image> Images { get; set; }
 
 
         #endregion
