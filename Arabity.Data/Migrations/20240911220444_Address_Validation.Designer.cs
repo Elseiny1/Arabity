@@ -4,6 +4,7 @@ using Arabity.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arabity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240911220444_Address_Validation")]
+    partial class Address_Validation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,39 +119,6 @@ namespace Arabity.Data.Migrations
                     b.ToTable("Favourite");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
-                {
-                    b.Property<string>("Customer_Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Comments")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<decimal>("Ratevalue")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("StoreId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StoreProductParcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("WorkshopId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Customer_Id");
-
-                    b.HasIndex("StoreId");
-
-                    b.HasIndex("StoreProductParcode");
-
-                    b.HasIndex("WorkshopId");
-
-                    b.ToTable("Rate");
-                });
-
             modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
                 {
                     b.Property<string>("Id")
@@ -162,6 +131,10 @@ namespace Arabity.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -195,6 +168,10 @@ namespace Arabity.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MadeIn")
                         .IsRequired()
@@ -248,6 +225,10 @@ namespace Arabity.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -501,37 +482,6 @@ namespace Arabity.Data.Migrations
                     b.Navigation("StoreProduct");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
-                {
-                    b.HasOne("Arabity.Data.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("Customer_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Arabity.Data.Models.StoreM", "Store")
-                        .WithMany("Rate")
-                        .HasForeignKey("StoreId");
-
-                    b.HasOne("Arabity.Data.Models.StoreProduct", "StoreProduct")
-                        .WithMany("Rate")
-                        .HasForeignKey("StoreProductParcode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Arabity.Data.Models.Workshop", "Workshop")
-                        .WithMany("Rate")
-                        .HasForeignKey("WorkshopId");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Store");
-
-                    b.Navigation("StoreProduct");
-
-                    b.Navigation("Workshop");
-                });
-
             modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
                 {
                     b.HasOne("Arabity.Data.Models.Address", "Address")
@@ -615,21 +565,6 @@ namespace Arabity.Data.Migrations
             modelBuilder.Entity("Arabity.Data.Models.Customer", b =>
                 {
                     b.Navigation("Favourites");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
-                {
-                    b.Navigation("Rate");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.StoreProduct", b =>
-                {
-                    b.Navigation("Rate");
-                });
-
-            modelBuilder.Entity("Arabity.Data.Models.Workshop", b =>
-                {
-                    b.Navigation("Rate");
                 });
 #pragma warning restore 612, 618
         }

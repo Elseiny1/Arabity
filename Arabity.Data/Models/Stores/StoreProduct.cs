@@ -39,8 +39,6 @@
            ErrorMessage = "Only letters accepted")]
         public string Model { get; set; }
 
-        public string ImageUrl { get; set; }
-
         [Display(Name = "Price")]
         [Range(typeof(double), "0", "999999.99",
             ErrorMessage = "maxmum value is 999999.99")]
@@ -56,7 +54,8 @@
         public string Store_Id { get; set; }
         public StoreM Store { get; set; }
 
-       
+        public ICollection<Rate> Rate { get; set; }
+
 
 
         #endregion

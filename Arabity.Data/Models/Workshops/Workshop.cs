@@ -30,10 +30,10 @@
             , ErrorMessage = "Invalid phone number")]
         public string PhoneNumbre { get; set; } 
 
-        public string ImageUrl { get; set; }
-
         #region Relationships
         public Address Address { get; set; }
+
+        public ICollection<Rate> Rate { get; set; }
 
 
         #endregion
