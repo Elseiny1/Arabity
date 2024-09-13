@@ -122,6 +122,14 @@ namespace Arabity.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("EntityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -129,24 +137,9 @@ namespace Arabity.Data.Migrations
                     b.Property<double>("Size")
                         .HasColumnType("float");
 
-                    b.Property<string>("StoreMId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StoreProductParcode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("WorkshopId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("StoreMId");
-
-                    b.HasIndex("StoreProductParcode");
-
-                    b.HasIndex("WorkshopId");
-
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
@@ -533,21 +526,6 @@ namespace Arabity.Data.Migrations
                     b.Navigation("StoreProduct");
                 });
 
-            modelBuilder.Entity("Arabity.Data.Models.Image", b =>
-                {
-                    b.HasOne("Arabity.Data.Models.StoreM", null)
-                        .WithMany("Images")
-                        .HasForeignKey("StoreMId");
-
-                    b.HasOne("Arabity.Data.Models.StoreProduct", null)
-                        .WithMany("Images")
-                        .HasForeignKey("StoreProductParcode");
-
-                    b.HasOne("Arabity.Data.Models.Workshop", null)
-                        .WithMany("Images")
-                        .HasForeignKey("WorkshopId");
-                });
-
             modelBuilder.Entity("Arabity.Data.Models.Rate", b =>
                 {
                     b.HasOne("Arabity.Data.Models.Customer", "Customer")
@@ -666,22 +644,16 @@ namespace Arabity.Data.Migrations
 
             modelBuilder.Entity("Arabity.Data.Models.StoreM", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Rate");
                 });
 
             modelBuilder.Entity("Arabity.Data.Models.StoreProduct", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Rate");
                 });
 
             modelBuilder.Entity("Arabity.Data.Models.Workshop", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Rate");
                 });
 #pragma warning restore 612, 618
