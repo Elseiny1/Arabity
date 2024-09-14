@@ -8,7 +8,7 @@
         [Display(Name = "Name")]
         [MaxLength(100)]
         [RegularExpression("^[a-zA-Z0-9\\s]*$",//White listing only letters or numbers
-           ErrorMessage = "Only letters accepted")]
+           ErrorMessage = "Only letters or numbers accepted")]
         public string Name { get; set; }
 
         [Display(Name = "Description")]
@@ -55,7 +55,7 @@
         public StoreM Store { get; set; }
 
         public ICollection<Rate> Rate { get; set; }
-        
+        public ICollection<Brand> Brand { get; set; }
 
 
         #endregion

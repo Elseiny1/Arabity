@@ -28,6 +28,8 @@
 
         #region Relations
         public ICollection<Favourite> Favourites { get; set; }
+        public ICollection<Brand> Brand { get; set; }
+
         public Address Address { get; set; }
 
 
