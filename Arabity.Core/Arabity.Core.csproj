@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Arabity.Data\Arabity.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
 </Project>
