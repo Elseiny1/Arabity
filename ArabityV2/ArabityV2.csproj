@@ -7,6 +7,7 @@
     <UserSecretsId>aspnet-ArabityV2-EDF9729B-CE25-4B2F-9803-7E5461F6601C</UserSecretsId>
   </PropertyGroup>
 
+
   <ItemGroup>
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -50,6 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.33" />    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.33" />    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.33">

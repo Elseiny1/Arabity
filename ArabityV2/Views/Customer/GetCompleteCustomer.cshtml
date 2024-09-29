@@ -1,0 +1,47 @@
+﻿@using Arabity.Core.ViewModel
+@model CompleteData_VM
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Roboto:wght@100;300;400;500;700;900&family=Sigmar+One&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
+</head>
+<body>
+     <form asp-action="CompleteDataAsync" class="needs-validation container p-5" novalidate="" enctype="multipart/form-data">
+         <div class="col-8">
+                <input type="file" asp-for="ImageFile" enctype="multipart/form-data" accept="image/jpg" />
+            </div>
+             <div class="col-8">
+                <label asp-for="FristName" class="control-label">Frist Name</label>
+                <div class="input-group has-validation">
+                    <input asp-for="FristName" type="text" class="form-control" id="FristName" placeholder="Frist Name" required="">
+                    <div class="invalid-feedback">
+                        Your username is required.
+                    </div>
+                </div>
+            </div>
+             <div class="col-8">
+                <label asp-for="LastName" class="control-label">Last Name</label>
+                <div class="input-group has-validation">
+                    <input asp-for="LastName" type="text" class="form-control" id="LastName" placeholder="Last Name" required="">
+                    <div class="invalid-feedback">
+                        Your username is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <label asp-for="PhoneNumbre" class="control-label">Phone Numbre</label>
+                <input asp-for="PhoneNumbre" type="tel" class="form-control" id="phone" placeholder="Phone-Numper" required="">
+                <div class="invalid-feedback">
+                    Please enter your shipping phone.
+                </div>
+            </div>
+     </form>
+</body>
