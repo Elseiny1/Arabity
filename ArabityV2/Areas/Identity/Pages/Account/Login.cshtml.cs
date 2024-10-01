@@ -14,18 +14,23 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Arabity.Core.IRepo;
 
 namespace ArabityV2.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IAccount _account;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, 
+            ILogger<LoginModel> logger, 
+            IAccount account)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _account = account;
         }
 
         /// <summary>
@@ -114,7 +119,11 @@ namespace ArabityV2.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var customer = await _account.GetCustomerAsync(Input.Email);
                     _logger.LogInformation("User logged in.");
+                    if ( customer == null)
+                        return RedirectToAction("GetCompleteCustomer", "Customer" , new {Input.Email});
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

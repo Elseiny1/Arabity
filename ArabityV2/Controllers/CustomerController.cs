@@ -15,7 +15,7 @@ namespace ArabityV2.Controllers
         public async Task<IActionResult> GetCompleteCustomer(string email)
         {
             if (email == null)
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("HomeController", "Index");
 
             return View();
         }

@@ -15,7 +15,7 @@ namespace Arabity.Core.Repo
 
         public async Task<Customer> GetCustomerAsync(string email)
         {
-            var user = await _userManager.FindByNameAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             var customer = await _context.Customers.FindAsync(user.Id);
             if(customer == null) 
                 return null;
