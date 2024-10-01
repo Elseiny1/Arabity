@@ -12,9 +12,12 @@ namespace ArabityV2.Controllers
             _customerInfo = customerInfo;
         }
         [HttpGet]
-        public IActionResult GetCompleteCustomer(string email)
+        public async Task<IActionResult> GetCompleteCustomer(string email)
         {
-            return View(new {email});
+            if (email == null)
+                return RedirectToAction("Home", "Index");
+
+            return View();
         }
 
         [HttpPost]

@@ -32,6 +32,7 @@ builder.Services.AddControllersWithViews();
 
 #region Instanses
 builder.Services.AddScoped<ICustomerInfo, CustomerInfo>();
+builder.Services.AddScoped<IAccount, Account>();
 
 #endregion
 

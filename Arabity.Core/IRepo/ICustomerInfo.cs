@@ -1,6 +1,4 @@
-﻿
-
-namespace Arabity.Core.IRepo
+﻿namespace Arabity.Core.IRepo
 {
     public interface ICustomerInfo
     {
