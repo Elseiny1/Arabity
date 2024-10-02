@@ -4,9 +4,9 @@ namespace Arabity.Core.ViewModel
 {
     public class CompleteData_VM
     {
-        [Display(Name = "Email")]
+        [Display(Name ="Email")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Display(Name = "Frist Name")]
         [MaxLength(50)]
@@ -28,8 +28,8 @@ namespace Arabity.Core.ViewModel
         public string PhoneNumbre { get; set; }
 
         [Display(Name ="Personal Image")]
-        [FileExtensions(Extensions = ".PNG",
+        [FileExtensions(Extensions = ".png",
             ErrorMessage = "File Extention is .PNG only")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

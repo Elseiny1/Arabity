@@ -21,8 +21,8 @@ namespace ArabityV2.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IAccount _account;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IAccount _account;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger, 
@@ -119,10 +119,10 @@ namespace ArabityV2.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    var customer = await _account.GetCustomerAsync(Input.Email);
                     _logger.LogInformation("User logged in.");
+                    var customer = await _account.GetCustomerAsync(Input.Email);
                     if ( customer == null)
-                        return RedirectToAction("GetCompleteCustomer", "Customer" , new {Input.Email});
+                        return RedirectToAction("CompleteCustomer", "Customer" , new {Input.Email});
 
                     return LocalRedirect(returnUrl);
                 }

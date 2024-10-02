@@ -3,9 +3,12 @@
     public class CustomerInfo : ICustomerInfo
     {
         private readonly ApplicationDbContext _context;
-        public CustomerInfo(ApplicationDbContext context)
+        private readonly IAccount _account;
+        public CustomerInfo(ApplicationDbContext context, 
+                            IAccount account)
         {
             _context = context;
+            _account = account;
         }
 
         //Validating Images
@@ -18,7 +21,7 @@
 
         }
 
-        public async Task<bool> CompleteDataAsync(CompleteData_VM customer)
+        public async Task<bool> CompleteDataAsync(CompleteData_VM customer, string email)
         {
             if (customer is null)
                 return false;
@@ -26,8 +29,11 @@
             try
             {
                 string imageUrl = await ImageCheckAsync(customer.ImageFile);
+                string customerId=await _account.GetUserIdAsync(email);
+
                 var user = new Customer
                 {
+                    Id= customerId,
                     FristName = customer.FristName,
                     LastName = customer.LastName,
                     PhoneNumbre = customer.PhoneNumbre,

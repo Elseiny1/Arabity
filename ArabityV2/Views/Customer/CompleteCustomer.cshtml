@@ -14,11 +14,14 @@
     <title>Sign Up</title>
 </head>
 <body>
-     <form asp-action="CompleteDataAsync" class="needs-validation container p-5" novalidate="" enctype="multipart/form-data">
+    <form asp-controller="Customer" asp-action="CompleteCustomer" method="post" class="needs-validation container p-5" novalidate="" enctype="multipart/form-data">
          <div class="col-8">
                 <input type="file" asp-for="ImageFile" enctype="multipart/form-data" accept="image/jpg" />
-            </div>
-             <div class="col-8">
+         </div>
+        <div class="col-8">
+            <input type="hidden" asp-for="Email"/>
+        </div>
+            <div class="col-8">
                 <label asp-for="FristName" class="control-label">Frist Name</label>
                 <div class="input-group has-validation">
                     <input asp-for="FristName" type="text" class="form-control" id="FristName" placeholder="Frist Name" required="">
@@ -43,6 +46,9 @@
                     Please enter your shipping phone.
                 </div>
             </div>
-     </form>
+            <div class="col-8">
+                <input type="submit" name="submit" value="Submit" />
+            </div>
+    </form>
 </body>
 </html>

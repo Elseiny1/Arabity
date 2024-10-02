@@ -12,26 +12,26 @@ namespace ArabityV2.Controllers
             _customerInfo = customerInfo;
         }
         [HttpGet]
-        public async Task<IActionResult> GetCompleteCustomer(string email)
+        public async Task<IActionResult> CompleteCustomer(string email)
         {
             if (email == null)
-                return RedirectToAction("HomeController", "Index");
-
-            return View();
+                return RedirectToAction("Index", "Home");
+            CompleteData_VM vm = new CompleteData_VM { Email = email };
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteDataAsync(CompleteData_VM customer)
+        public async Task<IActionResult> CompleteCustomer(CompleteData_VM customer)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("GetCompleteCustomer", new {});
+                return View(customer);
 
-            var result = await _customerInfo.CompleteDataAsync(customer);
+            var result = await _customerInfo.CompleteDataAsync(customer, customer.Email);
 
             if (!result)
-                return View();
+                return View(customer);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

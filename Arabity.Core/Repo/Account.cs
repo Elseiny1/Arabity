@@ -22,5 +22,15 @@ namespace Arabity.Core.Repo
 
             return customer;
         }
+        public async Task<string> GetUserIdAsync (string email)
+        {
+            var user= await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user.Id;
+        }
     }
 }
