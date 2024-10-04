@@ -24,13 +24,20 @@ namespace ArabityV2.Controllers
         public async Task<IActionResult> CompleteCustomer(CompleteData_VM customer)
         {
             if (!ModelState.IsValid)
+            {
+                customer.ErrorMessage = ModelState.Values.SelectMany(x => x.Errors).ToString();
                 return View(customer);
-
+            }
+            
             var result = await _customerInfo.CompleteDataAsync(customer, customer.Email);
 
             if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to add this customer");
+                
                 return View(customer);
-
+            }
+            
             return RedirectToAction("Index", "Home");
         }
     }

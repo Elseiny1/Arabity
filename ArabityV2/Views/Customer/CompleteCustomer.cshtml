@@ -15,6 +15,12 @@
 </head>
 <body>
     <form asp-controller="Customer" asp-action="CompleteCustomer" method="post" class="needs-validation container p-5" novalidate="" enctype="multipart/form-data">
+         <div>
+            @if(Model.ErrorMessage!=null)
+              {
+                  <p>@Html.ValidationSummary()</p>
+              }
+         </div>
          <div class="col-8">
                 <input type="file" asp-for="ImageFile" enctype="multipart/form-data" accept="image/jpg" />
          </div>
